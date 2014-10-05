@@ -18,7 +18,7 @@ class Psacs(QtGui.QMainWindow, psacsUI.Ui_MainWindow):
     def sayHello(self):
         self.statusBar.showMessage(self.tr("Finished"))
         
-if __name__=='__main__':
+if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     core = Psacs()
     core.main()
