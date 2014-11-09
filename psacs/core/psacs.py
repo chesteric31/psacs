@@ -61,7 +61,8 @@ class psacs(wx.Frame):
 
     def OnLeftClick(self, event, MyThread):
         self.label.SetLabel("Left Clicking")
-        MyThread.start()
+        if MyThread.isAlive() == False:
+            MyThread.start()
         
     def OnStopClick(self, event, MyThread):
         self.label.SetLabel("Stop Clicking")
