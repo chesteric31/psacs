@@ -1,37 +1,12 @@
 #!/usr/bin/python
 
 import wx
-from pymouse import PyMouse
-import time
-import threading
-
-class Clicking(threading.Thread): 
-
-    def __init__(self, label):
-        threading.Thread.__init__(self) 
-        self._stopevent = threading.Event()
-        self.label = label
-    def run(self): 
-        mouse = PyMouse()
-        old_x_dim = None
-        old_y_dim = None
-        while not self._stopevent.isSet():
-            time.sleep(2)
-            x_dim, y_dim = mouse.position()
-            if x_dim != old_x_dim or y_dim != old_y_dim:
-                mouse.click(x_dim, y_dim, 1)
-                self._stopevent.wait(1.0)
-            old_x_dim = x_dim
-            old_y_dim = y_dim
-        self.label.SetLabel("The thread is done")
-    def stop(self): 
-        self._stopevent.set()
+from Clicking import Clicking
 
 class psacs(wx.Frame):
 
-    #MyThread = None
-    def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title)
+    def __init__(self, parent, title):
+        wx.Frame.__init__(self, parent, -1, title)
         self.parent = parent
         self.initialize()
 
@@ -70,5 +45,5 @@ class psacs(wx.Frame):
 
 if __name__ == "__main__":
     app = wx.App()
-    frame = psacs(None, -1, 'PSACS')
+    frame = psacs(None, 'PSACS')
     app.MainLoop()
